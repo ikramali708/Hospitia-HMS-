@@ -1,19 +1,49 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/layout/Sidebar";
+
 import Navbar from "../components/layout/Navbar";
+import Sidebar from "../components/layout/Sidebar/Sidebar";
 
 function MainLayout() {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen((prev) => !prev);
+    };
+
+    const closeSidebar = () => {
+        setIsSidebarOpen(false);
+    };
+
     return (
-        <div className="flex min-h-screen">
-            <Sidebar />
+        <div className="min-h-screen bg-slate-100">
 
-            <div className="flex flex-1 flex-col">
-                <Navbar />
+            {/* Mobile Overlay */}
 
-                <main className="flex-1 p-6 bg-gray-100">
+            {isSidebarOpen && (
+                <div
+                    onClick={closeSidebar}
+                    className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
+                />
+            )}
+
+            <Sidebar
+                isOpen={isSidebarOpen}
+                closeSidebar={closeSidebar}
+            />
+
+            <div className="transition-all duration-300 lg:ml-64">
+
+                <Navbar toggleSidebar={toggleSidebar} />
+
+                <main className="p-4 md:p-6 lg:p-8">
+
                     <Outlet />
+
                 </main>
+
             </div>
+
         </div>
     );
 }

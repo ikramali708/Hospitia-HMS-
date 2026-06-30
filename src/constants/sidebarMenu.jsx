@@ -32,9 +32,4 @@ export const sidebarMenu = [
         path: "/profile",
         icon: UserCircle,
     },
-    {
-        title: "Profile",
-        path: "/profile",
-        icon: UserCircle,
-    },
 ];
