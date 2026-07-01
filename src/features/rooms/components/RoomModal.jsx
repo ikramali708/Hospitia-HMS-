@@ -5,6 +5,8 @@ function RoomModal({
 
     isOpen,
     onClose,
+    onSubmit,
+    selectedRoom,
 
 }) {
 
@@ -16,11 +18,19 @@ function RoomModal({
 
             onClose={onClose}
 
-            title="Add Room"
-
+            title={
+                selectedRoom
+                    ? "Edit Room"
+                    : "Add Room"
+            }
         >
 
-            <RoomForm />
+            <RoomForm
+                onSubmit={onSubmit}
+                onClose={onClose}
+                selectedRoom={selectedRoom}
+
+            />
 
         </Modal>
 

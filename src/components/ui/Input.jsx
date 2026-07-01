@@ -1,8 +1,10 @@
 function Input({
+    name,
     value,
     onChange,
     placeholder,
     icon: Icon,
+    error
 }) {
 
     return (
@@ -17,11 +19,40 @@ function Input({
             )}
 
             <input
+                name={name}
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-10 pr-4 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className={`
+
+                    w-full
+                    rounded-xl
+                    border
+                    py-3
+                    pl-10
+                    pr-4
+                    outline-none
+                    transition
+
+                    ${error
+
+                        ? "border-red-500 focus:ring-red-200"
+
+                        : "border-slate-200 focus:border-blue-500 focus:ring-blue-100"
+
+                    }
+
+`}
             />
+            {error && (
+
+                <p className="mt-2 text-sm text-red-500">
+
+                    {error}
+
+                </p>
+
+            )}
 
         </div>
     );

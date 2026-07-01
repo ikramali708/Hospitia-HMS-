@@ -19,18 +19,47 @@ function RoomsPage() {
 
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-    const handleAddRoom = (room) => {
+
+    const initialState = {
+
+        roomNumber: "",
+
+        roomType: "Standard",
+
+        price: "",
+
+        capacity: "",
+
+        status: "Available",
+
+    };
+    const [formData, setFormData] = useState(initialState);
+    const handleAddRoom = (newRoom) => {
+
+        const room = {
+
+            id: Date.now(),
+
+            ...newRoom,
+
+        };
 
         setRooms(prev => [
 
             ...prev,
 
-            {
-                id: Date.now(),
-                ...room,
-            }
+            room,
 
         ]);
+        setFormData(initialState);
+
+    };
+
+    const handleEditRoom = (room) => {
+
+        setSelectedRoom(room);
+
+        setIsModalOpen(true);
 
     };
 
@@ -38,18 +67,14 @@ function RoomsPage() {
     const handleUpdateRoom = (updatedRoom) => {
 
         setRooms(prev =>
-
             prev.map(room =>
-
                 room.id === updatedRoom.id
-
                     ? updatedRoom
-
                     : room
-
             )
-
         );
+
+        setSelectedRoom(null);
 
     };
 
@@ -99,13 +124,20 @@ function RoomsPage() {
 
             <RoomsTable
                 rooms={filteredRooms}
+                onEdit={handleEditRoom}
             />
             <RoomModal
-
                 isOpen={isModalOpen}
-
-                onClose={() => setIsModalOpen(false)}
-
+                onClose={() => {
+                    setSelectedRoom(null);
+                    setIsModalOpen(false);
+                }}
+                selectedRoom={selectedRoom}
+                onSubmit={
+                    selectedRoom
+                        ? handleUpdateRoom
+                        : handleAddRoom
+                }
             />
 
         </div>

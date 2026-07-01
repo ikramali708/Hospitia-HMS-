@@ -2,7 +2,7 @@ import Table from "../../../components/ui/Table";
 import RoomRow from "./RoomRow";
 import EmptyState from "../../../components/ui/EmptyState";
 
-function RoomsTable({ rooms }) {
+function RoomsTable({ rooms, onEdit }) {
     return (
         <Table title="Rooms List">
 
@@ -47,6 +47,7 @@ function RoomsTable({ rooms }) {
                         <RoomRow
                             key={room.id}
                             room={room}
+                            onEdit={onEdit}
                         />
 
                     ))

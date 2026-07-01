@@ -1,7 +1,7 @@
 import Badge from "../../../components/ui/Badge";
 import { Pencil, Trash2 } from "lucide-react";
 
-function RoomRow({ room }) {
+function RoomRow({ room, onEdit, }) {
     return (
         <tr className="border-b hover:bg-slate-50">
 
@@ -21,7 +21,8 @@ function RoomRow({ room }) {
 
                 <div className="flex gap-3">
 
-                    <button className="text-blue-600 hover:text-blue-800">
+                    <button className="text-blue-600 hover:text-blue-800" onClick={() => onEdit(room)}>
+
                         <Pencil size={18} />
                     </button>
 
