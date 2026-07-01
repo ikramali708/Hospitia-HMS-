@@ -17,7 +17,7 @@ function SidebarLogo() {
                     </h2>
 
                     <p className="text-xs text-slate-400">
-                        Hotel Management
+                        Hotel Management system
                     </p>
 
                 </div>

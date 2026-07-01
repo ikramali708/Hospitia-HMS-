@@ -31,5 +31,6 @@ export const sidebarMenu = [
         title: "Profile",
         path: "/profile",
         icon: UserCircle,
+
     },
 ];

@@ -30,4 +30,5 @@ export const dashboardStats = [
         value: 68,
         icon: Users,
     },
+
 ];

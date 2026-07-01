@@ -5,7 +5,7 @@ function Table({ title, children }) {
         <Card
             title={title}
             action={
-                <button className="rounded-lg px-3 py-2 text-sm font-medium text-blue-600 transition hover:bg-blue-50">
+                <button className="rounded-lg px-3 py-2 text-sm font-medium text-blue-600 transition hover:bg-blue-50 hover:cursor-pointer">
                     View All
                 </button>
             }

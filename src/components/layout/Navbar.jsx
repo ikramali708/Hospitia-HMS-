@@ -54,7 +54,7 @@ function Navbar({ toggleSidebar }) {
                 <div className="hidden items-center gap-3 md:flex">
 
                     <img
-                        src="https://i.pravatar.cc/45"
+                        src="../src/assets/UpdatedImage.png"
                         alt="Admin"
                         className="h-11 w-11 rounded-full object-cover"
                     />
