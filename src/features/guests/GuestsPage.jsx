@@ -3,6 +3,7 @@ import { useState } from "react";
 import GuestToolBar from "../guests/components/GuestsToolBar";
 import GuestsTable from "../guests/components/GuestsTable";
 import getGuests from "../guests/Services/GuestService";
+import GuestModal from "../guests/components/GuestsModal";
 
 function GuestsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -18,6 +19,16 @@ function GuestsPage() {
     return matchesSearch;
     console.log(isModalOpen);
   });
+
+  const handleAddGuest = (newGuest) => {
+    const guest = {
+      id: Date.now(),
+      ...newGuest,
+    };
+
+    setGuests((prev) => [...prev, guest]);
+    setFormData(initialState);
+  };
 
   const handleEditGuest = (guest) => {
     setSelectedGuest(guest);
@@ -38,6 +49,15 @@ function GuestsPage() {
       />
 
       <GuestsTable guests={filteredGuests} onEdit={handleEditGuest} />
+      <GuestModal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setSelectedGuest(null);
+          setIsModalOpen(false);
+        }}
+        selectedGuest={selectedGuest}
+        onSubmit={selectedGuest ? handleUpdateGuest : handleAddGuest}
+      />
     </div>
   );
 }

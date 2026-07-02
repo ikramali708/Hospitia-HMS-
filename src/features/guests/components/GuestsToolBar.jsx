@@ -24,7 +24,7 @@ function GuestToolBar({
           icon={Search}
         />
       </div>
-      <Button onClick={() => alert("Add Guest clicked!")}>+ Add Guest</Button>
+      <Button onClick={onAddGuest}>+ Add Guest</Button>
     </div>
   );
 }
