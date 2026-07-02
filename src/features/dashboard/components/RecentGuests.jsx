@@ -1,6 +1,7 @@
 import Table from "../../../components/ui/Table";
 import { recentGuests } from "../../../constants/recentGuests";
-
+import EmptyState from "../../../components/ui/EmptyState";
+import { CalendarX } from "lucide-react";
 function RecentGuests() {
     return (
         <Table title="Recent Guests">
@@ -26,19 +27,27 @@ function RecentGuests() {
 
             </thead>
 
-            {/* <tbody>
-                {recentGuests.map((guest) => (
-                    <tr key={guest.id}>
-                        <td>{guest.name}</td>
-                        <td>{guest.country}</td>
-                        <td>{guest.room}</td>
-                    </tr>
-                ))}
-            </tbody> */}
-
             <tbody>
 
-                {recentGuests.map((guest) => (
+
+
+
+     {recentGuests.length === 0 ? (
+
+                    <tr>
+
+                        <td
+                            colSpan={6}
+                        >
+                              
+                            <EmptyState Icon={CalendarX} name="No Recent Guests"  desc=""/>
+                        </td>
+
+                    </tr>
+
+                ) : (
+
+                recentGuests.map((guest) => (
 
                     <tr
                         key={guest.id}
@@ -61,7 +70,7 @@ function RecentGuests() {
 
                     </tr>
 
-                ))}
+                )))}
 
             </tbody>
 

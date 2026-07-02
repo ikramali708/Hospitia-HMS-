@@ -16,15 +16,6 @@ function RoomsToolbar({
 
             <div className="flex flex-col gap-4 md:flex-row">
 
-                {/* <Input
-                    value={searchTerm}
-                    onChange={(e) =>
-                        setSearchTerm(e.target.value)
-                    }
-                    placeholder="Search room..."
-                    icon={Search}
-                /> */}
-
                 <Input
                     value={searchTerm}
                     onChange={(e) => {
@@ -35,18 +26,7 @@ function RoomsToolbar({
                     icon={Search}
                 />
 
-                {/* <Select
-                    value={status}
-                    onChange={(e) =>
-                        setStatus(e.target.value)
-                    }
-                    options={[
-                        "All",
-                        "Available",
-                        "Occupied",
-                        "Maintenance",
-                    ]}
-                /> */}
+            
                 <Select
                     value={status}
                     onChange={(e) => {

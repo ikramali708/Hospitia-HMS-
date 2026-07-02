@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import Footer from "../components/layout/Footer";
 
 import Navbar from "../components/layout/Navbar";
 import Sidebar from "../components/layout/Sidebar/Sidebar";
@@ -39,11 +40,12 @@ function MainLayout() {
                 <main className="p-4 md:p-6 lg:p-8">
 
                     <Outlet />
+                  
 
                 </main>
 
             </div>
-
+         <Footer/>
         </div>
     );
 }

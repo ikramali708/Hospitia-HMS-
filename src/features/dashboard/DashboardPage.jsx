@@ -14,7 +14,7 @@ function DashboardPage() {
 
                     <h1 className="text-4xl font-bold">
 
-                        Welcome Back 👋
+                        Welcome Back Dear!
 
                     </h1>
 
@@ -26,7 +26,7 @@ function DashboardPage() {
 
                 </div>
 
-                <Button>
+                <Button onClick={() => alert("New Booking")}>
 
                     + New Booking
 
@@ -52,7 +52,7 @@ function DashboardPage() {
                 <RecentBookings />
 
                 <RecentGuests />
-
+               
             </div>
 
         </div>

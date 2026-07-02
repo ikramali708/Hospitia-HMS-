@@ -12,7 +12,7 @@ function Table({ title, children }) {
         >
             <div className="overflow-x-auto">
 
-                <table className="min-w-[700px] w-full">
+                <table className="min-w-[400px] w-full">
 
                     {children}
 

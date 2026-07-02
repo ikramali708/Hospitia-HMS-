@@ -1,6 +1,6 @@
 function StatCard({ title, value, icon: Icon }) {
     return (
-        <div className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+        <div className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer">
 
             <div className="flex items-start justify-between">
 
@@ -17,7 +17,7 @@ function StatCard({ title, value, icon: Icon }) {
                     <div className="mt-5 flex items-center gap-2">
 
                         <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-700">
-                            +12%
+                            +11%
                         </span>
 
                         <span className="text-sm text-slate-500">

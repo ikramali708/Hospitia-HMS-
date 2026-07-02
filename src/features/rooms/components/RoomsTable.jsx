@@ -1,6 +1,8 @@
 import Table from "../../../components/ui/Table";
 import RoomRow from "./RoomRow";
 import EmptyState from "../../../components/ui/EmptyState";
+import { SearchX } from "lucide-react";
+
 
 function RoomsTable({ rooms, onEdit }) {
     return (
@@ -35,7 +37,7 @@ function RoomsTable({ rooms, onEdit }) {
                         <td
                             colSpan={6}
                         >
-                            <EmptyState />
+                            <EmptyState Icon={SearchX} name="No Rooms Found" desc="Please search another keywords" />
                         </td>
 
                     </tr>

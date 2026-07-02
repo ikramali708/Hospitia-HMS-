@@ -4,17 +4,15 @@ import Button from "../../../components/ui/Button";
 import { useState } from "react";
 import { useEffect } from "react";
 
-
+const initialState = {
+    roomNumber: "",
+    roomType: "Standard",
+    price: "",
+    capacity: "",
+    status: "Available",
+};
 function RoomForm({ onSubmit, onClose, selectedRoom }) {
-    const [formData, setFormData] = useState({
-
-        roomNumber: "",
-        roomType: "Standard",
-        price: "",
-        capacity: "",
-        status: "Available",
-
-    });
+    const [formData, setFormData] = useState(initialState);
     useEffect(() => {
 
         if (selectedRoom) {
@@ -30,7 +28,7 @@ function RoomForm({ onSubmit, onClose, selectedRoom }) {
     }, [selectedRoom]);
 
 
-    // const [formData, setFormData] = useState(initialState);
+
     //Error handling and validation
 
     const [errors, setErrors] = useState({});
