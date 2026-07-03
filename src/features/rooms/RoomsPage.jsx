@@ -4,6 +4,8 @@ import RoomsTable from "./components/RoomsTable";
 import RoomModal from "./components/RoomModal";
 import { getRooms } from "./Service/roomService";
 import { useState } from "react";
+import DeleteRoomModal from "./components/DeleteRoomModal";
+import { toast } from "react-toastify";
 
 function RoomsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,6 +18,10 @@ function RoomsPage() {
   const [selectedRoom, setSelectedRoom] = useState(null);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
+  const [roomToDelete, setRoomToDelete] = useState(null);
 
   const initialState = {
     roomNumber: "",
@@ -38,6 +44,7 @@ function RoomsPage() {
 
     setRooms((prev) => [...prev, room]);
     setFormData(initialState);
+    toast.success("Room added successfully!");
   };
 
   const handleEditRoom = (room) => {
@@ -52,11 +59,27 @@ function RoomsPage() {
     );
 
     setSelectedRoom(null);
+    toast.info("Room updated successfully!");
   };
 
-  const handleDeleteRoom = (id) => {
-    setRooms((prev) => prev.filter((room) => room.id !== id));
+  const handleDeleteClick = (room) => {
+    setRoomToDelete(room);
+
+    setIsDeleteOpen(true);
   };
+
+  const handleConfirmDelete = () => {
+    setRooms((prev) => prev.filter((room) => room.id !== roomToDelete.id));
+    toast.error("Room deleted successfully!");
+
+    setRoomToDelete(null);
+
+    setIsDeleteOpen(false);
+  };
+
+  // const handleDeleteRoom = (id) => {
+  //   setRooms((prev) => prev.filter((room) => room.id !== id));
+  // };
 
   const filteredRooms = rooms.filter((room) => {
     const matchesSearch =
@@ -83,7 +106,11 @@ function RoomsPage() {
         onAddRoom={() => setIsModalOpen(true)}
       />
 
-      <RoomsTable rooms={filteredRooms} onEdit={handleEditRoom} />
+      <RoomsTable
+        rooms={filteredRooms}
+        onEdit={handleEditRoom}
+        onDelete={handleDeleteClick}
+      />
       <RoomModal
         isOpen={isModalOpen}
         onClose={() => {
@@ -92,6 +119,15 @@ function RoomsPage() {
         }}
         selectedRoom={selectedRoom}
         onSubmit={selectedRoom ? handleUpdateRoom : handleAddRoom}
+      />
+      <DeleteRoomModal
+        isOpen={isDeleteOpen}
+        onClose={() => {
+          setRoomToDelete(null);
+          setIsDeleteOpen(false);
+        }}
+        onConfirm={handleConfirmDelete}
+        room={roomToDelete}
       />
     </div>
   );
