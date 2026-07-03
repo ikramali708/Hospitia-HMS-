@@ -3,96 +3,42 @@ import RoomsToolbar from "./components/RoomsToolbar";
 import RoomsTable from "./components/RoomsTable";
 import RoomModal from "./components/RoomModal";
 import { getRooms } from "./Service/roomService";
-import { useState } from "react";
 import DeleteRoomModal from "./components/DeleteRoomModal";
 import { toast } from "react-toastify";
+import { useRooms } from "./hooks/useRooms.js";
 
 function RoomsPage() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const {
+    filteredRooms,
 
-  const [status, setStatus] = useState("All");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+    searchTerm,
+    setSearchTerm,
 
-  // const rooms = getRooms();
-  const [rooms, setRooms] = useState(getRooms());
-  const [selectedRoom, setSelectedRoom] = useState(null);
+    status,
+    setStatus,
 
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    selectedRoom,
 
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+    isModalOpen,
+    setIsModalOpen,
 
-  const [roomToDelete, setRoomToDelete] = useState(null);
+    isDeleteOpen,
+    setIsDeleteOpen,
 
-  const initialState = {
-    roomNumber: "",
+    roomToDelete,
 
-    roomType: "Standard",
+    handleAddRoom,
 
-    price: "",
+    handleEditRoom,
 
-    capacity: "",
+    handleUpdateRoom,
 
-    status: "Available",
-  };
-  const [formData, setFormData] = useState(initialState);
-  const handleAddRoom = (newRoom) => {
-    const room = {
-      id: Date.now(),
+    handleDeleteClick,
 
-      ...newRoom,
-    };
+    handleConfirmDelete,
 
-    setRooms((prev) => [...prev, room]);
-    setFormData(initialState);
-    toast.success("Room added successfully!");
-  };
-
-  const handleEditRoom = (room) => {
-    setSelectedRoom(room);
-
-    setIsModalOpen(true);
-  };
-
-  const handleUpdateRoom = (updatedRoom) => {
-    setRooms((prev) =>
-      prev.map((room) => (room.id === updatedRoom.id ? updatedRoom : room)),
-    );
-
-    setSelectedRoom(null);
-    toast.info("Room updated successfully!");
-  };
-
-  const handleDeleteClick = (room) => {
-    setRoomToDelete(room);
-
-    setIsDeleteOpen(true);
-  };
-
-  const handleConfirmDelete = () => {
-    setRooms((prev) => prev.filter((room) => room.id !== roomToDelete.id));
-    toast.error("Room deleted successfully!");
-
-    setRoomToDelete(null);
-
-    setIsDeleteOpen(false);
-  };
-
-  // const handleDeleteRoom = (id) => {
-  //   setRooms((prev) => prev.filter((room) => room.id !== id));
-  // };
-
-  const filteredRooms = rooms.filter((room) => {
-    const matchesSearch =
-      room.roomNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      room.roomType.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      room.status.toLowerCase().includes(searchTerm.toLowerCase());
-
-    const matchesStatus =
-      status === "All" || room.status.toLowerCase() === status.toLowerCase();
-
-    return matchesSearch && matchesStatus;
-    console.log(isModalOpen);
-  });
+    setSelectedRoom,
+  } = useRooms();
 
   return (
     <div className="space-y-8">
