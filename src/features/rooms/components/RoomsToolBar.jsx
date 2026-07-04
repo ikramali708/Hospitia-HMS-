@@ -3,6 +3,7 @@ import { Search } from "lucide-react";
 import Button from "../../../components/ui/Button";
 import Input from "../../../components/ui/Input";
 import Select from "../../../components/ui/Select";
+import { Download } from "lucide-react";
 
 function RoomsToolbar({
   searchTerm,
@@ -10,6 +11,7 @@ function RoomsToolbar({
   status,
   setStatus,
   onAddRoom,
+  onExport,
 }) {
   return (
     <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -31,7 +33,14 @@ function RoomsToolbar({
           options={["All", "Available", "Occupied", "Maintenance"]}
         />
       </div>
-      <Button onClick={onAddRoom}>+ Add Room</Button>
+      <div className="flex gap-4">
+        <Button onClick={onExport}>
+          <Download size={18} />
+          Export to CSV
+        </Button>
+
+        <Button onClick={onAddRoom}>+ Add Room</Button>
+      </div>
     </div>
   );
 }
