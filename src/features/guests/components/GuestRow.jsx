@@ -20,14 +20,14 @@ function GuestRow({ guest, onEdit, onDelete }) {
         <div className="flex gap-3">
           <button
             onClick={() => onEdit(guest)}
-            className="text-blue-600 hover:text-blue-800"
+            className="text-blue-600 hover:text-blue-800 cursor-pointer"
           >
             <Pencil size={18} />
           </button>
 
           <button
             onClick={() => onDelete(guest)}
-            className="text-red-600 hover:text-red-800"
+            className="text-red-600 hover:text-red-800 cursor-pointer"
           >
             <Trash2 size={18} />
           </button>

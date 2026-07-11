@@ -1,128 +1,97 @@
-import Input from "../../../components/ui/Input";
-import Select from "../../../components/ui/Select";
-import Button from "../../../components/ui/Button";
 import { useState } from "react";
-import { useEffect } from "react";
 
-const initialState = {
-  roomNumber: "",
-  roomType: "Standard",
-  price: "",
-  capacity: "",
-  status: "Available",
-};
-function GuestForm({ onSubmit, onClose, selectedGuest }) {
-  const [formData, setFormData] = useState(initialState);
-  useEffect(() => {
-    if (selectedGuest) {
-      setFormData(selectedGuest);
-    } else {
-      setFormData(initialState);
-    }
-  }, [selectedGuest]);
+function GuestForm({ selectedGuest, onSubmit, onClose }) {
+  const [formData, setFormData] = useState({
+    name: selectedGuest?.name || "",
 
-  //Error handling and validation
+    email: selectedGuest?.email || "",
 
-  const [errors, setErrors] = useState({});
-  const validate = () => {
-    const newErrors = {};
+    phone: selectedGuest?.phone || "",
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
+    city: selectedGuest?.city || "",
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
-    }
-
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Phone is required";
-    }
-
-    if (!formData.Address.trim()) {
-      newErrors.Address = "Address is required";
-    }
-
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
-  };
+    status: selectedGuest?.status || "Active",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     setFormData((prev) => ({
       ...prev,
-
       [name]: value,
-    }));
-
-    setErrors((prev) => ({
-      ...prev,
-
-      [name]: "",
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!validate()) return;
     onSubmit(formData);
-    onClose();
+
+    setTimeout(() => {
+      onClose();
+    }, 150);
   };
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit}>
-      <Input
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <input
         name="name"
         value={formData.name}
         onChange={handleChange}
-        error={errors.name}
-        placeholder="Name"
+        placeholder="Guest Name"
+        className="w-full rounded-xl border p-3"
       />
 
-      <Input
+      <input
         name="email"
         value={formData.email}
         onChange={handleChange}
-        error={errors.email}
         placeholder="Email"
+        className="w-full rounded-xl border p-3"
       />
 
-      <Input
+      <input
         name="phone"
         value={formData.phone}
         onChange={handleChange}
-        error={errors.phone}
         placeholder="Phone"
+        className="w-full rounded-xl border p-3"
       />
 
-      <Input
-        name="Address"
-        value={formData.Address}
+      <input
+        name="city"
+        value={formData.city}
         onChange={handleChange}
-        error={errors.Address}
-        placeholder="Address"
-      />
-      {/* 
-      <Select
-        name="roomType"
-        value={formData.roomType}
-        onChange={handleChange}
-        options={["Standard", "Deluxe", "Suite"]}
+        placeholder="City"
+        className="w-full rounded-xl border p-3"
       />
 
-      <Select
+      <select
         name="status"
         value={formData.status}
         onChange={handleChange}
-        options={["Available", "Occupied", "Maintenance"]}
-      /> */}
+        className="w-full rounded-xl border p-3"
+      >
+        <option>Active</option>
+        <option>Inactive</option>
+      </select>
 
-      <Button type="submit">Save Guest</Button>
+      <div className="flex justify-end gap-3">
+        <button
+          type="button"
+          onClick={onClose}
+          className="rounded-xl border px-5 py-2"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          className="rounded-xl bg-blue-600 px-5 py-2 text-white"
+        >
+          Save
+        </button>
+      </div>
     </form>
   );
 }

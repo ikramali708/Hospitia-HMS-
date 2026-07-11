@@ -30,7 +30,15 @@ function GuestsToolbar({
         />
       </div>
 
-      <Button onClick={onAddGuest}>+ Add Guest</Button>
+      <Button
+        // onClick={() => {
+        //   console.log("Button Clicked");
+        //   onAddGuest();
+        // }}
+        onClick={() => alert("Button Clicked")}
+      >
+        + Add Guest
+      </Button>
     </div>
   );
 }
