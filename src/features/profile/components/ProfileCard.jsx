@@ -5,9 +5,8 @@ function ProfileCard({ profile }) {
         <img
           src={profile.image}
           alt={profile.name}
-          className="h-36 w-36 rounded-full object-cover border-4 border-blue-100"
+          className="h-36 w-36 rounded-full border-4 border-blue-100 object-cover"
         />
-
         <h2 className="mt-5 text-2xl font-bold">{profile.name}</h2>
 
         <p className="mt-2 text-slate-500">{profile.role}</p>

@@ -1,6 +1,6 @@
 import Button from "../../../components/ui/Button";
 
-function ProfileInfo({ profile }) {
+function ProfileInfo({ profile, onEdit }) {
   return (
     <div className="rounded-2xl bg-white p-8 shadow-sm">
       <h2 className="mb-8 text-2xl font-semibold">Personal Information</h2>
@@ -32,7 +32,7 @@ function ProfileInfo({ profile }) {
       </div>
 
       <div className="mt-10">
-        <Button>Edit Profile</Button>
+        <Button onClick={onEdit}>Edit Profile</Button>
       </div>
     </div>
   );
