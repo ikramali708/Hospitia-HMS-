@@ -23,10 +23,10 @@ function GuestsTable({ guests, onEdit }) {
         {guests.length === 0 ? (
           <tr>
             <td colSpan={6}>
-              <EmptyState
-                Icon={SearchX}
-                name="No Guests Found"
-                desc="Please search another keywords"
+              <
+              // Icon={SearchX}
+              // name="No Guests Found"
+              // desc="Please search another keywords"
               />
             </td>
           </tr>

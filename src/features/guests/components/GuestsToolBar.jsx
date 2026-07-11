@@ -4,11 +4,13 @@ import Button from "../../../components/ui/Button";
 import Input from "../../../components/ui/Input";
 import Select from "../../../components/ui/Select";
 
-function GuestToolBar({
+function GuestsToolbar({
   searchTerm,
   setSearchTerm,
-  guest,
-  setGuests,
+
+  status,
+  setStatus,
+
   onAddGuest,
 }) {
   return (
@@ -16,17 +18,21 @@ function GuestToolBar({
       <div className="flex flex-col gap-4 md:flex-row">
         <Input
           value={searchTerm}
-          onChange={(e) => {
-            console.log("Typing...", e.target.value);
-            setSearchTerm(e.target.value);
-          }}
-          placeholder="Search guests..."
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search guest..."
           icon={Search}
         />
+
+        <Select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          options={["All", "Active", "Inactive"]}
+        />
       </div>
+
       <Button onClick={onAddGuest}>+ Add Guest</Button>
     </div>
   );
 }
 
-export default GuestToolBar;
+export default GuestsToolbar;

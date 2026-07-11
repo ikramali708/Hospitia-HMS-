@@ -1,73 +1,54 @@
-// import PageHeader from "../../components/ui/PageHeader";
-// import { useState } from "react";
-// import GuestToolBar from "../guests/components/GuestsToolBar";
-// import GuestsTable from "../guests/components/GuestsTable";
-// import getGuests from "../guests/Services/GuestService";
-// import GuestModal from "../guests/components/GuestsModal";
+import PageHeader from "../../components/ui/PageHeader";
+import { useGuests } from "./hooks/useGuests.js";
+import GuestsToolbar from "./components/GuestsToolbar";
+import GuestsSummary from "./components/GuestsSummary";
+import { guestColumns } from "../../constants/guestColumns";
+import DataTable from "../../components/ui/DataTable/DataTable";
 
-// function GuestsPage() {
-//   const [searchTerm, setSearchTerm] = useState("");
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-//   const [guests, setGuests] = useState(getGuests());
-//   const [selectedGuest, setSelectedGuest] = useState(null);
+import GuestRow from "./components/GuestRow";
 
-//   const filteredGuests = guests.filter((guest) => {
-//     const matchesSearch =
-//       guest.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-//       guest.email.toLowerCase().includes(searchTerm.toLowerCase());
+function GuestsPage() {
+  const {
+    guests,
+    filteredGuests,
+    searchTerm,
 
-//     return matchesSearch;
-//     console.log(isModalOpen);
-//   });
+    setSearchTerm,
 
-//   const handleAddGuest = (newGuest) => {
-//     const guest = {
-//       id: Date.now(),
-//       ...newGuest,
-//     };
+    status,
 
-//     setGuests((prev) => [...prev, guest]);
-//     setFormData(initialState);
-//   };
+    setStatus,
+  } = useGuests();
 
-//   const handleEditGuest = (guest) => {
-//     setSelectedGuest(guest);
-
-//     setIsModalOpen(true);
-//   };
-
-//   return (
-//     <div className="space-y-8">
-//       <PageHeader title="Guests" subtitle="Manage the Guests in Easy Way." />
-
-//       <GuestToolBar
-//         searchTerm={searchTerm}
-//         setSearchTerm={setSearchTerm}
-//         guest={guests}
-//         setGuests={setGuests}
-//         onAddGuest={() => setIsModalOpen(true)}
-//       />
-
-//       <GuestsTable guests={filteredGuests} onEdit={handleEditGuest} />
-//       <GuestModal
-//         isOpen={isModalOpen}
-//         onClose={() => {
-//           setSelectedGuest(null);
-//           setIsModalOpen(false);
-//         }}
-//         selectedGuest={selectedGuest}
-//         onSubmit={selectedGuest ? handleUpdateGuest : handleAddGuest}
-//       />
-//     </div>
-//   );
-// }
-
-// export default GuestsPage;
-
-import React from "react";
-
-const GuestsPage = () => {
-  return <div>Guest page</div>;
-};
+  const handleAddGuest = () => {
+    alert("Guest Modal Coming Soon");
+  };
+  return (
+    <div className="space-y-8">
+      <PageHeader title="Guests" subtitle="Manage hotel guests." />
+      <GuestsSummary guests={filteredGuests} />
+      <GuestsToolbar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        status={status}
+        setStatus={setStatus}
+        onAddGuest={handleAddGuest}
+      />
+      <DataTable
+        title="Guests List"
+        columns={guestColumns}
+        data={filteredGuests}
+        renderRow={(guest) => (
+          <GuestRow
+            key={guest.id}
+            guest={guest}
+            onEdit={(guest) => console.log("Edit", guest)}
+            onDelete={(guest) => console.log("Delete", guest)}
+          />
+        )}
+      />
+    </div>
+  );
+}
 
 export default GuestsPage;

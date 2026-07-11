@@ -1,4 +1,5 @@
 import EmptyState from "../DataTable/EmptyState";
+import { SearchX } from "lucide-react";
 
 function DataTable({ title, columns, data, renderRow }) {
   return (
@@ -26,7 +27,11 @@ function DataTable({ title, columns, data, renderRow }) {
             {data.length === 0 ? (
               <tr>
                 <td colSpan={columns.length} className="py-10">
-                  <EmptyState />
+                  <EmptyState
+                    Icon={SearchX}
+                    name="No Data Found"
+                    desc="Try changing your search or filters."
+                  />
                 </td>
               </tr>
             ) : (
