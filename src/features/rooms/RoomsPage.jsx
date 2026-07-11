@@ -1,6 +1,6 @@
 import PageHeader from "../../components/ui/PageHeader";
 import RoomsToolbar from "./components/RoomsToolbar";
-import RoomsTable from "./components/RoomsTable";
+// import RoomsTable from "./components/RoomsTable";
 import RoomModal from "./components/RoomModal";
 import { getRooms } from "./Service/roomService";
 import DeleteRoomModal from "./components/DeleteRoomModal";
@@ -9,6 +9,8 @@ import { useRooms } from "./hooks/useRooms.js";
 import Pagination from "../../components/ui/Pagination";
 import { exportToCSV } from "../../utils/exportToCSV";
 import RoomsSummary from "./components/RoomsSummary";
+import DataTable from "../../components/ui/DataTable/DataTable";
+import RoomRow from "./components/RoomRow";
 function RoomsPage() {
   const {
     filteredRooms,
@@ -44,6 +46,37 @@ function RoomsPage() {
     lastPage,
     rooms,
   } = useRooms();
+  const columns = [
+    {
+      key: "room",
+      label: "Room",
+    },
+
+    {
+      key: "type",
+      label: "Type",
+    },
+
+    {
+      key: "price",
+      label: "Price",
+    },
+
+    {
+      key: "capacity",
+      label: "Capacity",
+    },
+
+    {
+      key: "status",
+      label: "Status",
+    },
+
+    {
+      key: "actions",
+      label: "Actions",
+    },
+  ];
   const handleExport = () => {
     exportToCSV(sortedRooms, "rooms");
   };
@@ -51,7 +84,7 @@ function RoomsPage() {
   return (
     <div className="space-y-8">
       <PageHeader title="Rooms" subtitle="Manage hotel rooms efficiently." />
-      <RoomsSummary rooms={rooms} />
+      <RoomsSummary rooms={sortedRooms} />
 
       <RoomsToolbar
         searchTerm={searchTerm}
@@ -61,7 +94,7 @@ function RoomsPage() {
         onExport={handleExport}
         onAddRoom={() => setIsModalOpen(true)}
       />
-
+      {/* 
       <RoomsTable
         rooms={paginatedRooms}
         onEdit={handleEditRoom}
@@ -69,6 +102,20 @@ function RoomsPage() {
         onSort={handleSort}
         sortField={sortField}
         sortOrder={sortOrder}
+      /> */}
+
+      <DataTable
+        title="Rooms List"
+        columns={columns}
+        data={sortedRooms}
+        renderRow={(room) => (
+          <RoomRow
+            key={room.id}
+            room={room}
+            onEdit={handleEditRoom}
+            onDelete={handleDeleteClick}
+          />
+        )}
       />
       <Pagination
         currentPage={currentPage}
