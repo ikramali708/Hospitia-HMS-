@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="App.Core/App.Core.csproj" />
+  <Project Path="App.Data/App.Data.csproj" />
+  <Project Path="App.Domain/App.Domain.csproj" />
+  <Project Path="App.IoC/App.IoC.csproj" />
+  <Project Path="HMS-Backend/App.Api.csproj" />
+</Solution>

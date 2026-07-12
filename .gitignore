@@ -1,0 +1,25 @@
+# ==========================
+# Node.js / React
+# ==========================
+node_modules/
+dist/
+
+# ==========================
+# ASP.NET Core
+# ==========================
+bin/
+obj/
+
+# Visual Studio
+.vs/
+
+# Visual Studio Code
+.vscode/
+
+# Environment files
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
