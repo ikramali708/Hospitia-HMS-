@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\App.Core\App.Core.csproj" />
+    <ProjectReference Include="..\App.Data\App.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DependencyContainer\" />
+    <Folder Include="RepositoryRegistration\" />
+    <Folder Include="ServiceRegistration\" />
+  </ItemGroup>
+
 </Project>
