@@ -25,7 +25,10 @@ public class RoomService : IRoomService
 
     public async Task<IEnumerable<RoomDto>> GetAllAsync()
     {
-        var rooms = await _repository.GetAllAsync();
+        var rooms = await _repository.GetAsync(
+    orderBy: q => q.OrderBy(r => r.RoomNumber)
+);
+
 
         return _mapper.Map<IEnumerable<RoomDto>>(rooms);
     }
